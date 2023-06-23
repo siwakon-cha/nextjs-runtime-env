@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-lotto-admin-dev
+  namespace: lotto29
+spec:
+  rules:
+    - host: admin.lotto29.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: lotto-dev-admin
+                port:
+                  number: 80
+  ingressClassName: nginx

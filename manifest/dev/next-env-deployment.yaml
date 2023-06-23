@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: next-env-admin
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: next-env-admin
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: next-env-admin
+    spec:
+      containers:
+        - name: next-env-admin
+          image: codecrafterteam/next-env:latest
+          imagePullPolicy: Always
+          env:
+            - name: EX1
+              value: "lotto88-admin-v2"
+            - name: APP_NAME
+              value: "TEST FROM K8S"
+            - name: APP_NAME_CLIENT
+              value: "TEST FROM K8S CLIENT"
+          ports:
+            - name: http
+              containerPort: 3000
